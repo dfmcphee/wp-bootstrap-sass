@@ -1,0 +1,15 @@
+/*!
+Theme Name: WPBootstrapSass
+Theme URI: http://www.dominicmcphee.com
+Description: A simple WordPress them built using Sass and Bootstrap 3.0
+Author: Dominic McPhee
+Author URI: http://www.dominicmcphee.com
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Version: 1.0
+*/
+
+// Compass imports
+@import "compass";
+
+@import "partials/bootstrap";
