@@ -1,6 +1,6 @@
 <?php get_header(); ?>
   <div class="row">
-  	<section role="main" class="span8">
+  	<section role="main" class="col-xs-12">
   
   		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
   
@@ -19,8 +19,6 @@
   		<?php endif; ?>
   
   	</section> <!-- /#main -->
-
-    <?php get_sidebar(); ?>
   </div>
 
 <?php get_footer(); ?>

@@ -1,6 +1,9 @@
 <?php get_header(); ?>
+<?php if ( function_exists('yoast_breadcrumb') ) {
+	yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+} ?>
 <div class="row">
-	<section id="main" role="main" class="span8">
+	<section id="main" role="main" class="col-xs-12">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -9,7 +12,5 @@
 		<?php endwhile; ?>
 
 	</section> <!-- /#main -->
-
-  <?php get_sidebar(); ?>
 </div>
 <?php get_footer(); ?>

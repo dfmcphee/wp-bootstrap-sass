@@ -1,11 +1,9 @@
 <?php get_header(); ?>
   <div class="row">
-    <div class="span8">
+    <div class="col-xs-12">
     	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
     
     		<div class="post" id="post-<?php the_ID(); ?>">
-    
-    			<h1><?php the_title(); ?></h1>
     
     			<div class="entry">
     
@@ -19,7 +17,6 @@
     
     		<?php endwhile; endif; ?>
       </div>
-      <?php get_sidebar(); ?>
   </div>
 
 <?php get_footer(); ?>

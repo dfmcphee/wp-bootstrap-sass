@@ -14,19 +14,39 @@
 	<!--[if lt IE 8]>
 	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
-
-  <div class="navbar navbar-static-top">
+	<div id="wrap">
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="container">
-      <a class="navbar-brand" href="<?php echo home_url( '/' ); ?>"><?php bloginfo( 'name' ); ?></a>
-      <?php wp_nav_menu( 
-  		  array( 
-  		    'theme_location' => 'primary',
-  		    'container_class' => '',
-  		    'menu_class' => 'nav navbar-nav'
-  		  ) 
-  		); ?>
-    </div>
-  </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
+            <a class="navbar-brand" href="<?php bloginfo('url'); ?>">
+                <?php bloginfo('name'); ?>
+            </a>
+        </div>
+
+        <?php
+            wp_nav_menu( array(
+                'menu'              => 'primary',
+                'theme_location'    => 'primary',
+                'depth'             => 2,
+                'container'         => 'div',
+                'container_class'   => 'slide collapse navbar-collapse navbar-1-collapse',
+                'menu_class'        => 'nav navbar-nav',
+                'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+                'walker'            => new wp_bootstrap_navwalker())
+            );
+        ?>
+    </div>
+  </nav>
+  <?php if(is_front_page()) { ?>
+    <?php echo WPBootstrapCarousel::get_gallery(8, 'main-carousel'); ?>
+  <?php } ?>
   
   <div id="container" class="container">

@@ -155,8 +155,9 @@ function mb_scripts() {
 	if ( !is_admin() ) {
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('modernizr', get_template_directory_uri() . '/assets/js/vendor/modernizr-2.6.2.min.js', false, NULL );
-		//wp_enqueue_script('customplugins', get_template_directory_uri() . '/assets/js/source/plugins.min.js', array('jquery'), NULL, true );
-		//wp_enqueue_script('customscripts', get_template_directory_uri() . '/assets/js/source/main.min.js', array('jquery'), NULL, true );
+    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/vendor/bootstrap.min.js', array('jquery'), false, true );
+		wp_enqueue_script('bootstrap-hover', get_template_directory_uri() . '/assets/js/vendor/twitter-bootstrap-hover-dropdown.min.js', array('jquery', 'bootstrap'), false, true );
+		wp_enqueue_script('customscripts', get_template_directory_uri() . '/assets/js/source/main.js', array('jquery'), false, true );
 	}
 }
 
@@ -181,3 +182,19 @@ function mb_remove_more_jump_link($link) {
 	}
 	return $link;
 }
+
+function btntag_func($atts, $content = null) {
+     extract( shortcode_atts( array(
+	      'id' => false,
+	      'class' => ' btn-default'
+     ), $atts));
+     
+     if ($id) {
+       $link = get_permalink($id);
+     } else {
+       $link = '#';
+     }
+     
+     return '<a href="' . $link . '" class="btn' . $class . '">' . $content . '</a>';
+}
+add_shortcode( 'btn', 'btntag_func' );
