@@ -8,6 +8,10 @@
 	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/favicon.ico">
 	<link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/apple-touch-icon.png">
 	<?php wp_head(); ?>
+	<?php
+    //show tracking code for the header
+    echo stripslashes($options['tracking']);
+  ?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -25,10 +29,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <a class="navbar-brand" href="<?php bloginfo('url'); ?>">
-                <?php bloginfo('name'); ?>
-            </a>
+            <?php $options = get_option('theme_settings'); ?>
+            <?php if($options['custom_logo']) { ?>
+              <a class="navbar-brand" href="<?php bloginfo( 'url' ) ?>/" title="<?php bloginfo( 'name' ) ?>" rel="homepage"><img src="<?php echo $options['custom_logo']; ?>" alt="<?php bloginfo( 'name' ) ?>" /></a>
+            <?php } else { ?>
+              <h2><a class="navbar-brand" href="<?php bloginfo( 'url' ) ?>/" title="<?php bloginfo( 'name' ) ?>" rel="homepage"><?php bloginfo( 'name' ) ?></a>
+            <?php } ?>
         </div>
 
         <?php
@@ -46,7 +52,7 @@
     </div>
   </nav>
   <?php if(is_front_page()) { ?>
-    <?php echo WPBootstrapCarousel::get_gallery(8, 'main-carousel'); ?>
+    <?php echo BootstrapCarousel::get_gallery(8, 'main-carousel'); ?>
   <?php } ?>
   
   <div id="container" class="container">

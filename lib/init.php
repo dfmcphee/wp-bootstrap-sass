@@ -15,8 +15,8 @@ function mb_setup() {
 
 	// Register menus
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'mbbasetheme' ),
-	) );
+		'primary' => __('Primary Menu', 'mbbasetheme'),
+	));
 
 	// Register Widget Areas
 	add_action( 'widgets_init', 'mb_widgets_init' );
@@ -25,22 +25,22 @@ function mb_setup() {
 	// add_filter('widget_text', 'do_shortcode');
 
 	// Add RSS links to head
-	add_theme_support( 'automatic-feed-links' );
+	add_theme_support('automatic-feed-links');
 
 	// Add Editor Style
-	add_editor_style( 'editor-style.css' );
+	add_editor_style('editor-style.css');
 
 	// Don't update theme
-	add_filter( 'http_request_args', 'mb_dont_update_theme', 5, 2 );
+	add_filter('http_request_args', 'mb_dont_update_theme', 5, 2);
 
 	// Prevent File Modifications
-	define ( 'DISALLOW_FILE_EDIT', true );
+	define ('DISALLOW_FILE_EDIT', true);
 
 	// Set Content Width
-	if ( ! isset( $content_width ) ) $content_width = 900;
+	if (!isset($content_width)) $content_width = 900;
 
 	// Enable Post Thumbnails
-	add_theme_support( 'post-thumbnails' );
+	add_theme_support('post-thumbnails');
 
 	// Add Image Sizes
 	// add_image_size( $name, $width = 0, $height = 0, $crop = false );
