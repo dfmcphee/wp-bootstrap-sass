@@ -9,6 +9,8 @@
 	<link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/apple-touch-icon.png">
 	<?php wp_head(); ?>
 	<?php
+	  // get options from theme
+	  $options = get_option('theme_settings');
     //show tracking code for the header
     echo stripslashes($options['tracking']);
   ?>
@@ -29,7 +31,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php $options = get_option('theme_settings'); ?>
             <?php if($options['custom_logo']) { ?>
               <a class="navbar-brand" href="<?php bloginfo( 'url' ) ?>/" title="<?php bloginfo( 'name' ) ?>" rel="homepage"><img src="<?php echo $options['custom_logo']; ?>" alt="<?php bloginfo( 'name' ) ?>" /></a>
             <?php } else { ?>
@@ -51,8 +52,8 @@
         ?>
     </div>
   </nav>
-  <?php if(is_front_page()) { ?>
-    <?php echo BootstrapCarousel::get_gallery(8, 'main-carousel'); ?>
+  <?php if(is_front_page() && $options['carousel_id']) { ?>
+    <?php echo BootstrapCarousel::get_gallery($options['carousel_id'], 'main-carousel'); ?>
   <?php } ?>
   
   <div id="container" class="container">

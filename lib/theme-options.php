@@ -1,12 +1,12 @@
 <?php
 //register settings
 function theme_settings_init(){
-    register_setting( 'theme_settings', 'theme_settings' );
+  register_setting( 'theme_settings', 'theme_settings' );
 }
 
 //add settings page to menu
 function add_settings_page() {
-add_menu_page( __( 'Theme Settings' ), __( 'Theme Settings' ), 'manage_options', 'settings', 'theme_settings_page');
+  add_menu_page( __( 'Theme Settings' ), __( 'Theme Settings' ), 'manage_options', 'settings', 'theme_settings_page');
 }
 
 //add actions
@@ -20,7 +20,7 @@ $color_scheme = array('default','blue','green',);
 function theme_settings_page() {
 
 if ( ! isset( $_REQUEST['updated'] ) )
-$_REQUEST['updated'] = false;
+  $_REQUEST['updated'] = false;
 
 //get variables outside scope
 global $color_scheme;
@@ -51,7 +51,14 @@ if ( false !== $_REQUEST['updated'] ) : ?>
 <label for="theme_settings[custom_logo]"><?php _e( 'Enter the URL to your custom logo' ); ?></label></td>
 </tr>
 
-<!-- Option 4: Tracking Code -->
+<!-- Option 2: Carousel ID -->
+<tr valign="top">
+<th scope="row"><?php _e( 'Carousel ID' ); ?></th>
+<td><input id="theme_settings[carousel_id]" type="text" size="36" name="theme_settings[carousel_id]" value="<?php esc_attr_e( $options['carousel_id'] ); ?>" />
+<label for="theme_settings[carousel_id]"><?php _e( 'Enter the ID of the carousel you want displayed on the homepage' ); ?></label></td>
+</tr>
+
+<!-- Option 3: Tracking Code -->
 <tr valign="top">
 <th scope="row"><?php _e( 'Tracking Code' ); ?></th>
 <td><label for="theme_settings[tracking]"><?php _e( 'Enter your analytics tracking code' ); ?></label>
