@@ -7,7 +7,7 @@ Author: Dominic McPhee
 Author URI: http://www.dominicmcphee.com
 License: GNU General Public License v2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Version: v1.0.1
+Version: v1.0.2
 */
 /*!
  * Bootstrap v3.0.0
@@ -5409,6 +5409,10 @@ td.visible-print {
     display: none !important;
   }
 }
+img {
+  max-width: 100%;
+}
+
 .navbar-nav li.current_page_parent > a[data-toggle=dropdown] {
   border-bottom: solid 2px #42B3E5;
 }

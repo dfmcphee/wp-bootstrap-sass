@@ -24,6 +24,25 @@
   <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="container">
+        <div class="row">
+      	    <div class="col-xs-12 align-center">
+              <?php if ( get_theme_mod( 'header_image' )) { ?>
+                  <div class='site-logo'>
+                      <a href='<?php echo esc_url( home_url( '/' ) ); ?>' title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
+                        <img src='<?php echo esc_url( get_theme_mod( 'header_image' ) ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
+                      </a>
+                  </div>
+              <?php } else { ?>
+                  <hgroup>
+                      <h1 class='site-title'>
+                        <a href='<?php echo esc_url( home_url( '/' ) ); ?>' title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'><?php bloginfo( 'name' ); ?>
+                        </a>
+                      </h1>
+                  </hgroup>
+              <?php } ?>
+              <p class="lead"><?php echo get_bloginfo ( 'description' );  ?></p>
+        	  </div>
+        </div>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -31,11 +50,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php if($options['custom_logo']) { ?>
-              <a class="navbar-brand" href="<?php bloginfo( 'url' ) ?>/" title="<?php bloginfo( 'name' ) ?>" rel="homepage"><img src="<?php echo $options['custom_logo']; ?>" alt="<?php bloginfo( 'name' ) ?>" /></a>
-            <?php } else { ?>
-              <h2><a class="navbar-brand" href="<?php bloginfo( 'url' ) ?>/" title="<?php bloginfo( 'name' ) ?>" rel="homepage"><?php bloginfo( 'name' ) ?></a>
-            <?php } ?>
         </div>
 
         <?php

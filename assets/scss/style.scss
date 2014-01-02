@@ -15,6 +15,10 @@ Version: v1.0.1
 
 @import "bootstrap/bootstrap";
 
+img {
+  max-width: 100%;
+}
+
 .navbar-nav {
   li.current_page_parent > a[data-toggle=dropdown] {
     border-bottom:solid 2px #42B3E5;

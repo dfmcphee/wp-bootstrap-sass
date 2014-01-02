@@ -1,92 +1,82 @@
 <?php
-//register settings
-function theme_settings_init(){
-  register_setting( 'theme_settings', 'theme_settings' );
+
+/**
+ * Add theme customization
+ */
+function bootstrap_sass_customize_register( $wp_customize ) {
+   //All our sections, settings, and controls will be added here
+   $wp_customize->add_section( 'customize_bootstrap_sass' , array(
+      'title'      => __( 'Customize Theme', 'bootstrap-sass' ),
+      'priority'   => 999,
+   ));
+   
+  $wp_customize->add_setting( 'header_image' , array(
+      'default'     => '',
+      'transport'   => 'refresh',
+   ));
+   
+   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'header_image', array(
+    	'label'        => __( 'Custom Header Image', 'bootstrap-sass' ),
+    	'section'    => 'customize_bootstrap_sass',
+    	'settings'   => 'header_image',
+   )));
+   
+   $wp_customize->add_setting( 'background_image' , array(
+      'default'     => '',
+      'transport'   => 'refresh',
+   ));
+   
+   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'background_image', array(
+    	'label'        => __( 'Custom Background Image', 'bootstrap-sass' ),
+    	'section'    => 'customize_bootstrap_sass',
+    	'settings'   => 'background_image',
+   )));
+   
+   $wp_customize->add_setting( 'footer_background_image' , array(
+      'default'     => '',
+      'transport'   => 'refresh',
+   ));
+   
+   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'footer_background_image', array(
+    	'label'        => __( 'Custom Background Image', 'bootstrap-sass' ),
+    	'section'    => 'customize_bootstrap_sass',
+    	'settings'   => 'footer_background_image',
+   )));
+   
+   $wp_customize->add_setting( 'homepage_carousel' , array(
+      'default'     => '',
+      'transport'   => 'refresh',
+   ));
+   
+   $wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'homepage_carousel', array(
+    	'label'        => __( 'Homepage Carousel ID', 'bootstrap-sass' ),
+    	'section'    => 'customize_bootstrap_sass',
+    	'settings'   => 'homepage_carousel',
+   )));
 }
+add_action( 'customize_register', 'bootstrap_sass_customize_register' );
 
-//add settings page to menu
-function add_settings_page() {
-  add_menu_page( __( 'Theme Settings' ), __( 'Theme Settings' ), 'manage_options', 'settings', 'theme_settings_page');
+/**
+ * Add Customize Styles
+ */
+function bootstrap_sass_customize_css()
+{
+    $background_image = esc_attr(get_theme_mod( 'background_image'));
+    if ($background_image && $background_image !== '') {
+      ?>
+         <style type="text/css">
+             body { background-image: url(<?php echo $background_image ?>); }
+         </style>
+      <?php
+    }
+    
+    $footer_background = esc_attr(get_theme_mod( 'footer_background_image'));
+    if ($footer_background && $footer_background !== '') {
+      ?>
+         <style type="text/css">
+             #footer { background-image: url(<?php echo $footer_background ?>); }
+         </style>
+      <?php
+    }
 }
-
-//add actions
-add_action( 'admin_init', 'theme_settings_init' );
-add_action( 'admin_menu', 'add_settings_page' );
-
-//define your variables
-$color_scheme = array('default','blue','green',);
-
-//start settings page
-function theme_settings_page() {
-
-if ( ! isset( $_REQUEST['updated'] ) )
-  $_REQUEST['updated'] = false;
-
-//get variables outside scope
-global $color_scheme;
-?>
-
-<div>
-
-<div id="icon-options-general"></div>
-<h2><?php _e( 'Theme Settings' ) //your admin panel title ?></h2>
-
-<?php
-//show saved options message
-if ( false !== $_REQUEST['updated'] ) : ?>
-<div><p><strong><?php _e( 'Options saved' ); ?></strong></p></div>
-<?php endif; ?>
-
-<form method="post" action="options.php">
-
-<?php settings_fields( 'theme_settings' ); ?>
-<?php $options = get_option( 'theme_settings' ); ?>
-
-<table>
-
-<!-- Option 1: Custom Logo -->
-<tr valign="top">
-<th scope="row"><?php _e( 'Custom Logo' ); ?></th>
-<td><input id="theme_settings[custom_logo]" type="text" size="36" name="theme_settings[custom_logo]" value="<?php esc_attr_e( $options['custom_logo'] ); ?>" />
-<label for="theme_settings[custom_logo]"><?php _e( 'Enter the URL to your custom logo' ); ?></label></td>
-</tr>
-
-<!-- Option 2: Carousel ID -->
-<tr valign="top">
-<th scope="row"><?php _e( 'Carousel ID' ); ?></th>
-<td><input id="theme_settings[carousel_id]" type="text" size="36" name="theme_settings[carousel_id]" value="<?php esc_attr_e( $options['carousel_id'] ); ?>" />
-<label for="theme_settings[carousel_id]"><?php _e( 'Enter the ID of the carousel you want displayed on the homepage' ); ?></label></td>
-</tr>
-
-<!-- Option 3: Tracking Code -->
-<tr valign="top">
-<th scope="row"><?php _e( 'Tracking Code' ); ?></th>
-<td><label for="theme_settings[tracking]"><?php _e( 'Enter your analytics tracking code' ); ?></label>
-<br />
-<textarea id="theme_settings[tracking]" name="theme_settings[tracking]" rows="5" cols="36"><?php esc_attr_e( $options['tracking'] ); ?></textarea></td>
-</tr>
-
-</table>
-
-<p><input name="submit" id="submit" value="Save Changes" type="submit"></p>
-</form>
-
-</div><!-- END wrap -->
-
-<?php
-}
-//sanitize and validate
-function options_validate( $input ) {
-    global $select_options, $radio_options;
-    if ( ! isset( $input['option1'] ) )
-        $input['option1'] = null;
-    $input['option1'] = ( $input['option1'] == 1 ? 1 : 0 );
-    $input['sometext'] = wp_filter_nohtml_kses( $input['sometext'] );
-    if ( ! isset( $input['radioinput'] ) )
-        $input['radioinput'] = null;
-    if ( ! array_key_exists( $input['radioinput'], $radio_options ) )
-        $input['radioinput'] = null;
-    $input['sometextarea'] = wp_filter_post_kses( $input['sometextarea'] );
-    return $input;
-}
-?>
+add_action( 'wp_head', 'bootstrap_sass_customize_css' );
