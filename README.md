@@ -1,5 +1,5 @@
 # WPBootstrapSass
-v1.0.3
+v1.0.4
 
 A simple WordPress theme built using Sass and Bootstrap 3.0
 
