@@ -21,7 +21,9 @@
 	    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 	<![endif]-->
 	<div id="wrap">
-  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    
+	<?php $nav_class = (get_theme_mod('navbar_inverse') ? 'navbar-inverse' : 'navbar-default'); ?>
+  <nav class="navbar <?php echo $nav_class ?> navbar-static-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="container">
         <div class="row">
@@ -40,7 +42,9 @@
                       </h1>
                   </hgroup>
               <?php } ?>
-              <p class="lead"><?php echo get_bloginfo ( 'description' );  ?></p>
+              <?php if ( get_theme_mod( 'show_tagline' )) { ?>
+                <p class="lead"><?php echo get_bloginfo ( 'description' );  ?></p>
+              <?php } ?>
         	  </div>
         </div>
         <div class="navbar-header">

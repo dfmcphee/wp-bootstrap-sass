@@ -1,7 +1,7 @@
 # WPBootstrapSass
-v1.0.4
+v1.0.5
 
-A simple WordPress theme built using Sass and Bootstrap 3.0
+A simple WordPress theme built using Sass and Bootstrap 3.1
 
 ## How to use the built in Carousel
 * Click Carousels-> Add New
@@ -10,4 +10,4 @@ A simple WordPress theme built using Sass and Bootstrap 3.0
 * You can then use the shortcode '[carousel id="___ID___"]' replacing ___ID___ with the post id you noted earlier.
 * You can also use a carousel on the homepage by setting this id in the Appearance->Customize page
 
-To receive automatic updates for this theme as they are released, intall this plugin: https://github.com/UCF/Theme-Updater
+To receive automatic updates for this theme as they are released, intall this plugin in WordPress: https://github.com/UCF/Theme-Updater
